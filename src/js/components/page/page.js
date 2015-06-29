@@ -12,12 +12,12 @@ require('./page.css');
 let pages = {
   pagefood : {
     pageClasses : 'page page--food',
-    heading : 'Food'
+    heading : ''
   },
-  pagefashion : {
+  /*pagefashion : {
     pageClasses : 'page page--fashion',
     heading : 'Fashion'
-  }
+  }*/
 };
 
 let Page = React.createClass({

@@ -9,8 +9,9 @@ require('./Router.css');
 
 let Header = require('./components/header/header');
 
+//let Popup = require('./components/header/popup');
+
 let Food = require('./components/page/page');
-let Fashion = require('./components/page/page');
 
 let App = React.createClass({
   mixins: [ Router.State ],
@@ -21,10 +22,10 @@ let App = React.createClass({
     return (
       <div>
       <Header>
+	<div id='popupContainer'> </div>
         <nav className='appNav'>
             <ul className='appNav-list'>
-              <li className='appNav-listItem'><Link className='appBtn' to='food' >Food</Link></li>
-              <li className='appNav-listItem'><Link className='appBtn' to='fashion' >Fashion</Link></li>
+              <li className='appNav-listItem'><Link className='appBtn' to='food' >Menú</Link></li>
             </ul>
         </nav>
       </Header>
@@ -49,7 +50,6 @@ let routes = (
   <Route handler={App}>
     <DefaultRoute handler={RedirectTo}/>
       <Route name="food" handler={Food} addHandlerKey={true} />
-      <Route name="fashion" handler={Fashion} addHandlerKey={true} />
   </Route>
 );
 

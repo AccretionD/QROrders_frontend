@@ -9,8 +9,38 @@ let actions = require('../../actions/app-actions');
 //let socketStore = require('../../stores/socket-store');
 let AddToBasket = require('../basket/add-to-basket.js');
 let RemoveFromBasket = require('../basket/remove-from-basket.js');
+var Popup = require('react-popup');
+
+/** Render popup */
+React.render(
+	<Popup closeHtml="×" />,
+	document.getElementById('popupContainer')
+);
+
+var requestOrder = document.getElementById('customButtons');
 
 require('./basket.css');
+/*
+requestOrder.addEventListener('click', function () {
+	Popup.create({
+		title: null,
+		content: 'This popup uses the create method directly to get more control. This popup demonstrates custom buttons.',
+		buttons: {
+			left: ['cancel'],
+			right: [{
+				text: 'Save',
+				className: 'success',
+				action: function () {*/
+					/** This popup will be displayed after this one has closed */
+				//	Popup.alert('Another popup yada yada');
+
+					/** Close this popup. Close will always close the current visible one, if one is visible */
+				/*	Popup.close();
+				}
+			}]
+		}
+	});
+});*/
 
 let Basket = React.createClass({
 
@@ -36,8 +66,28 @@ let Basket = React.createClass({
 
   render() {
 
+
+
     let clickHandler = () => {
-      actions.checkOut();
+/** Custom buttons */
+Popup.create({
+		title: null,
+		content: '¿Esta seguro?',
+		buttons: {
+			left: ['No'],
+			right: [{
+				text: 'Si',
+				className: 'success',
+				action: function () {
+					/** This popup will be displayed after this one has closed */
+					//Popup.alert('Another popup yada yada');
+					 actions.checkOut();
+					/** Close this popup. Close will always close the current visible one, if one is visible */
+					Popup.close();
+				}
+			}]
+		}
+	});     
       console.log("list:",this.getBasketData());
      
 
@@ -64,7 +114,7 @@ let Basket = React.createClass({
       <div className={"appBasket pure-u-3-5 pure-u-md-3-5 pure-u-lg-2-5 " + statusClassName}>
         <div className="pure-g">
 
-          <button onClick={clickHandler} className="appBasket-checkout pure-u-1-2">Pedir</button>
+          <button onClick={clickHandler} id="customButtons" className="appBasket-checkout pure-u-1-2">Pedir</button>
 
 	
           <div className="pure-u-1-2">
@@ -74,6 +124,8 @@ let Basket = React.createClass({
           </div>
         </div>
         <ul className="basketList list-reset">{list}</ul>
+
+
       </div>	
     );
   }

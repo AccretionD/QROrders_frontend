@@ -13,7 +13,7 @@ var Nav = React.createClass({
       <nav className='appNav'>
           <ul className='appNav-list'>
             <li className='appNav-listItem'><Link className='appBtn' to='food' >Food</Link></li>
-            <li className='appNav-listItem'><Link className='appBtn' to='fashion' >Fashion</Link></li>
+            //<li className='appNav-listItem'><Link className='appBtn' to='fashion' >Fashion</Link></li>
           </ul>
       </nav>
     );
