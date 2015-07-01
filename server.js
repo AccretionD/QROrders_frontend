@@ -21,9 +21,17 @@ app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, 'app')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.post("/chef",  function(req, res, next) {
+   console.log(req.body,req.body.id);
+ res.setHeader('Location', '/resources/go' );
+            res.statusCode = 204;
+            res.end();
+
+ next();
+});
 
 app.get('/comments.json', function(req, res) {
-  fs.readFile('comments.json', function(err, data) {
+  fs.readFile('coiimments.json', function(err, data) {
     res.setHeader('Content-Type', 'application/json');
     res.send(data);
   });

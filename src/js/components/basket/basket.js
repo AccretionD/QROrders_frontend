@@ -67,6 +67,8 @@ let Basket = React.createClass({
   render() {
 
 
+console.log('props basket deepTranfering rocking',this.props.children);
+var table=this.props.children;
 
     let clickHandler = () => {
 /** Custom buttons */
@@ -81,7 +83,7 @@ Popup.create({
 				action: function () {
 					/** This popup will be displayed after this one has closed */
 					//Popup.alert('Another popup yada yada');
-					 actions.checkOut();
+					 actions.checkOut(table);
 					/** Close this popup. Close will always close the current visible one, if one is visible */
 					Popup.close();
 				}

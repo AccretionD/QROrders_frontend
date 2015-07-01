@@ -4,7 +4,9 @@ let Basket = require('../basket/basket.js');
 
 var Header =
   React.createClass({
+	  
     render:function(){
+	var deepTranfering=this.props.children;
       return (
         <div className='container'>
         <div className="pure-g">
@@ -13,11 +15,13 @@ var Header =
             <h1>
 <img src="http://filomenu.com/images/filomenu.png" width="300" height="82" alt="Restaurante Café" />
 </h1>
-              { this.props.children }
-          </header>
+                        </header>
           <div className="fixed-container">
             <div className="container">
-              <Basket className="pure-g" />
+              <Basket className="pure-g"
+		>
+		{deepTranfering}
+	      </Basket>
             </div>
           </div>
           </div>

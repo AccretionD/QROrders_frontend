@@ -8,8 +8,9 @@ let { Route, DefaultRoute, RouteHandler, Link } = Router;
 require('./Router.css');
 
 let Header = require('./components/header/header');
-
-//let Popup = require('./components/header/popup');
+let Items = require('./components/products/items');
+//let Basket = require('./components/basket/basket.js');
+let Popup = require('./components/header/popup');
 
 let Food = require('./components/page/page');
 
@@ -17,41 +18,63 @@ let App = React.createClass({
   mixins: [ Router.State ],
 
   render: function () {
+    var table_id=this.props.params.params.id;	  
     let name = this.getRoutes().slice(0).reverse()[0].name;
-
-    return (
+	 
+return (
       <div>
-      <Header>
-	<div id='popupContainer'> </div>
-        <nav className='appNav'>
-            <ul className='appNav-list'>
-              <li className='appNav-listItem'><Link className='appBtn' to='food' >Menú</Link></li>
-            </ul>
-        </nav>
+      <Header >
+	{table_id}
       </Header>
-        <ReactCSSTransitionGroup component="div" transitionName="routerTransition">
-          <RouteHandler key={name} {...this.props} />
-        </ReactCSSTransitionGroup>
+       <div className='container'>
+              <div className="food">
+
+                <Items type="food" >
+
+		</Items>
+              </div>
+          </div>
+
       </div>
     );
   }
 });
 
-let RedirectTo = React.createClass({
+/*let RedirectTo = React.createClass({
   statics: {
-    willTransitionTo (transition) {
-      transition.redirect('/food');
+    willTransitionTo (transition, params) {
+	  console.log("adsfasdf","asdfg"+params.id,params);
+      //transition.redirect("food",{id:params.id});
+      //transition.redirect('food', params);
+      transition.redirect("food",{id:params.id})
     }
   },
   render () {}
-});
+});*/
+let routes = (
+<Route handler={App}  path="/">
+   <Route handler={App}  path="/food/:id"/>
+</Route>
+);
+
+//  <Route name="food" path="/food/:id"  handler={ Food } addHandlerKey={true}  />
+
+/*
+ let routes = (
+<Route handler={Food}  path="/">
+  <Route handler={ Food } path="/go/:id"/>
+   <Route name="food" path="food/:id"  handler={ Food } addHandlerKey={true}  />
+
+</Route>
+);
 
 let routes = (
-  <Route handler={App}>
-    <DefaultRoute handler={RedirectTo}/>
+  <Route handler={App} app="/oders">
+    <DefaultRoute handler={RedirectTo} path="order"/>
       <Route name="food" handler={Food} addHandlerKey={true} />
+      <Route handler={RedirectTo} path="orders" name="comments" />
   </Route>
-);
+);*/
 
 Router.run(routes, function (Handler, state) {
   React.render(<Handler params={state} />, document.getElementById('app'));

@@ -23,7 +23,7 @@ let pages = {
 let Page = React.createClass({
       render: function() {
         let pageName = this.props.params.pathname.slice(1);
-        //console.log(pageName);
+        console.log(pageName);
         return (
           <div className='container'>
               <div className={pages['page'+pageName].pageClasses}>

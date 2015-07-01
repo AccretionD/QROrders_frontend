@@ -17,10 +17,15 @@ let BasketStore = Reflux.createStore({
       this.listenTo(actions.checkOut, this.onCheckOut);
     },
 
-  onCheckOut() {
-	//console.log("socket-store.js pos",pos);
+  onCheckOut(table) {
+	var ldata=this.data.basketItems;
+	for (var i=0;i<ldata.length;i++){
+   		ldata[i].table=table;
+		console.log(ldata[i]);
+	}
+
 	request.post('/chef')
-  	.send({c:this.data.basketItems})
+  	.send({c:ldata})
   	.end(function(err, res){
 		console.log('did it again',res);
   	});
